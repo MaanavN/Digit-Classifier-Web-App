@@ -31,10 +31,11 @@ def upload():
         # Open the image
         image = Image.open(io.BytesIO(file.read()))
         image = image.resize((28, 28))
+        image = image.rotate(-90)
         image = image.convert("L")
         image = ImageOps.invert(image)
         image.show()
-        image = image.point(lambda p: 255 if p >= 128 else 0)
+        image = image.point(lambda p: 255 if p >= 127.5 else 0)
         image.show()
 
         # Apply the transformations
